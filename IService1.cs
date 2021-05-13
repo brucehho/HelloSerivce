@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+namespace HelloSerivce
+{
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
+    [ServiceContract]
+    public interface IService1
+    {
+        // define the url . string repsonse url that accepts a paramter number
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "SayHello/")]
+        string SayHello();
+
+        //
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetData/{value}/")]
+        string GetData(string value);
+
+        //
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetModelObject/{id}/")]
+        HelloObject GetModelObject(string id);
+
+        //
+        // Ask a question, receive an answer!
+        [OperationContract]
+        string ObtainAnswerToQuestion(string userQuestion);
+    }
+
+    // Use a data contract as illustrated in the sample below to add composite types to service operations.
+    [DataContract]
+    public class CompositeType
+    {
+    }
+}
